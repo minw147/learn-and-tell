@@ -6,4 +6,4 @@ The temptation was to fold this into `TOPIC-GRAPH.json` (ADR 0002) since both ar
 
 Concretely: a workspace with 12 modules produced a TOPIC-GRAPH with 12-ish nodes, but a wiki with 17 entity pages, because entities like "the Byzantine Empire" recur across 5 different modules and deserve one page with 5 backlinks, not 5 disconnected mentions. Both layers are maintained in parallel on every module write (SKILL.md Explore Mode steps 4 and 5); neither is optional once the other exists.
 
-This also seeded the interactive viewer (`templates/wiki-viewer.html`) — the first real instance of the "interactive canvas" Phase 2 direction the README's openflipbook credit gestured at, though built independently (canvas force-graph + reader view, no openflipbook code) rather than as a fork.
+This also seeded the interactive viewer (`templates/wiki-viewer.html`) — a canvas force-graph + reader view, built independently, unrelated to the openflipbook credit in `README.md` (which is only about the "every concept gets an illustration" principle).

@@ -29,7 +29,7 @@ Then invoke the skill and say what you want to explore. Everything — mission, 
 
 Alongside `TOPIC-GRAPH.json` (module-level: what order things were learned, and why), every workspace also maintains `./wiki/` — a [Karpathy-style LLM wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) of entity/concept pages, cross-referenced via `[[wikilinks]]`, synthesized incrementally from whatever modules mention that entity. See `references/WIKI-FORMAT.md` and `docs/adr/0010-wiki-layer-is-separate-from-topic-graph.md`.
 
-The wiki also ships with a self-contained, dependency-free interactive viewer (`templates/wiki-viewer.html`) — a reader mode with clickable wikilinks and a canvas-based force-directed graph mode (degree-tier coloring, Force/Linear layout toggle, mobile touch support). This is the first concrete step toward the "interactive canvas" direction gestured at in the Credit section below — built independently rather than as an openflipbook fork, but the same underlying instinct: the topic graph shouldn't only live as static HTML pages.
+The wiki also ships with a self-contained, dependency-free interactive viewer (`templates/wiki-viewer.html`) — a reader mode with clickable wikilinks and a canvas-based force-directed graph mode (degree-tier coloring, Force/Linear layout toggle, mobile touch support).
 
 ## Credit
 
@@ -43,7 +43,7 @@ learn-and-tell is a deliberate adaptation, not an original invention, of two ope
 
 learn-and-tell adapts `/teach`'s workspace-as-directory convention, mission-driven grounding, ZPD calibration, and "never trust parametric knowledge" sourcing discipline, then extends it for a content-creator use case: problem-posing instead of quizzing, a non-linear Question-Annotated Topic Graph instead of a linear lesson sequence, and a Create Mode that turns confirmed highlights into publishable artifacts. It targets Claude Code's skill format rather than Hermes — see `docs/adr/0009-claude-code-skill-not-hermes.md`.
 
-**Visual/interactive engine, planned for Phase 2** — inspired by [openflipbook (eren23/openflipbook)](https://github.com/eren23/openflipbook) (MIT License), an open-source clone of flipbook.page's "image-is-the-UI" infinite-canvas experience. Phase 1 (this repo, today) borrows only its "every concept gets an illustration" principle, generated via the `ai-multimodal` skill — no code or infrastructure from openflipbook is used yet. A future phase may fork openflipbook itself to render the Topic Graph as an interactive canvas, reusing the `TOPIC-GRAPH.json` and `./images/` this phase produces.
+**"Every concept gets an illustration"** — inspired by [openflipbook (eren23/openflipbook)](https://github.com/eren23/openflipbook) (MIT License), an open-source clone of flipbook.page's infinite-canvas experience. Only the illustration principle is borrowed (via the `ai-multimodal` skill) — no openflipbook code or infrastructure is used.
 
 ## License
 
