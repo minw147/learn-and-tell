@@ -4,6 +4,19 @@ A Claude Code skill for content creators: explore a topic through **problem-posi
 
 Not a tutor. The AI never quizzes or scores you — you pose the questions, and they decide where the exploration goes next. See `BRAINSTORM.md` for the full design rationale, `CONTEXT.md` for the glossary of terms this skill uses, and `docs/adr/` for the specific trade-offs behind how it's built.
 
+## Install
+
+```bash
+npx github:minw147/learn-and-tell
+```
+
+Installs to `~/.claude/skills/learn-and-tell` (available in every project) by default. Only `SKILL.md`, `references/`, and `templates/` are installed — the dev-only design docs (`BRAINSTORM.md`, `CONTEXT.md`, `docs/adr/`) stay in this repo, not in your skills directory.
+
+Options:
+- `--local` — install to `./.claude/skills/learn-and-tell` (this project only) instead of the user-level directory
+- `--dir=<path>` — install to a custom directory
+- `--force` / `-f` — overwrite an existing install
+
 ## Usage
 
 ```

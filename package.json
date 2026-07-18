@@ -1,0 +1,24 @@
+{
+  "name": "learn-and-tell-skill",
+  "version": "0.1.0",
+  "description": "Installer for the learn-and-tell Claude Code skill — problem-posing driven topic exploration for content creators.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minw147/learn-and-tell.git"
+  },
+  "bin": {
+    "learn-and-tell-skill": "bin/install.js"
+  },
+  "files": [
+    "bin/install.js",
+    "SKILL.md",
+    "references",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=16.7.0"
+  }
+}
