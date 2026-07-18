@@ -188,6 +188,7 @@
 
   /* touch: let the graph canvas own all touch gestures (pan/pinch/tap) instead of the browser */
   #graph-wrap { touch-action: none; }
+  #side-panel { touch-action: auto; }
 
   @media (max-width: 760px) {
     body { overflow-x:hidden; }
@@ -364,7 +365,7 @@ const MODULE_URLS = {
    category: pick 3-5 that fit this workspace's entities and update CATEGORY_ORDER below to match
    (original design used event/empire/place/person/culture — adapt freely). */
 const NODES = [
-  { id:'example-entity-one', en:'Example Entity One', category:'event', desc:'One-sentence summary reused from the page\\'s 一句话 line.' },
+  { id:'example-entity-one', en:'Example Entity One', category:'event', desc:"One-sentence summary reused from the page's 一句话 line." },
   { id:'example-entity-two', en:'Example Entity Two', category:'culture', desc:'Second placeholder so the graph has something to render.' }
 ];
 // edge type is derived from real [[wikilink]] mutuality: linked both ways = 'direct', one-way = 'thematic'
@@ -583,7 +584,6 @@ function nodeAt(sx, sy) {
   return null;
 }
 
-wrap.addEventListener('pointerdown', (e) => {
 /* multi-touch: single finger drags a node or pans the canvas; two fingers pinch-zoom (and pan by
    midpoint movement); a tap is decided at release by total displacement, not by "did it move at
    all", so touch jitter doesn't turn a tap-to-select into an accidental drag. */
@@ -595,6 +595,7 @@ function ptDist(p1, p2) { return Math.hypot(p1.x - p2.x, p1.y - p2.y); }
 function ptMid(p1, p2) { return { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 }; }
 
 wrap.addEventListener('pointerdown', (e) => {
+  if (sidePanel.contains(e.target)) return; // let clicks/taps inside the side panel behave normally
   try { wrap.setPointerCapture(e.pointerId); } catch (err) {}
   const rect = wrap.getBoundingClientRect(); const sx = e.clientX - rect.left, sy = e.clientY - rect.top;
   activePointers.set(e.pointerId, { x: sx, y: sy });
