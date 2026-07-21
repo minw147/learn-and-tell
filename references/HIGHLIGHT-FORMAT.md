@@ -7,7 +7,7 @@ A highlight is a candidate or confirmed "aha moment" — raw material for an out
 At the end of any module that produced a genuine insight (not routine coverage), draft a candidate highlight in the AI's own working notes. **Do not show this to the user, do not announce it, do not write it to disk.** This is not a file the user opens — it's material the AI is quietly accumulating for the moment Create Mode gets triggered.
 
 A candidate is worth drafting when the module produced something like:
-- A causal/necessity connection that wasn't obvious before ("十字军东征最终削弱了东罗马，而不是强化了它")
+- A causal/necessity connection that wasn't obvious before ("the Crusades ultimately weakened the Byzantine Empire instead of strengthening it")
 - A cross-topic or cross-branch connection the user hadn't made
 - A genuine surprise or reframe, not just a new fact
 

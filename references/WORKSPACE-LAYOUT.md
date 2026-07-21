@@ -13,7 +13,7 @@ Current directory = workspace for one topic (same convention as `/teach`). Creat
 ├── modules/                # 0001-<slug>.html, one file = one graph node, no exceptions
 ├── images/                 # one concept illustration per module, ai-multimodal-generated
 ├── highlights/             # CONFIRMED highlights only (candidates live only in AI's working notes until Create Mode surfaces them)
-├── outputs/                # finished artifacts: short-video-script, blog-post, long-video-script instances
+├── outputs/                # finished artifacts: short-video-script, blog-post, long-video-script, essay, presentation-outline instances — each calibrated to a specific audience, see AUDIENCE-CALIBRATION.md
 ├── learning-records/       # 0001-<slug>.md, non-obvious understanding/prior-knowledge records
 ├── reference/              # compressed cheat-sheets/glossaries referenced across modules
 └── wiki/                   # Karpathy-style LLM wiki — entity pages + index.md + log.md + WIKI.md conventions, see WIKI-FORMAT.md

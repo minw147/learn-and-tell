@@ -1,8 +1,10 @@
 # learn-and-tell
 
-A Claude Code skill for content creators: explore a topic through **problem-posing driven learning**, then turn what you actually discovered into a publishable video script or blog post. Learning is the means; a real artifact — with your own thinking in it — is the end.
+A Claude Code skill for content creators: explore a topic through **problem-posing driven learning**, then turn what you actually discovered into a publishable artifact — video script, blog post, essay, or presentation outline. Learning is the means; a real artifact — with your own thinking in it — is the end.
 
-Not a tutor. The AI never quizzes or scores you — you pose the questions, and they decide where the exploration goes next. See `BRAINSTORM.md` for the full design rationale, `CONTEXT.md` for the glossary of terms this skill uses, and `docs/adr/` for the specific trade-offs behind how it's built.
+Not a tutor. The AI never quizzes or scores you — you pose the questions, and they decide where the exploration goes next. Every output artifact is calibrated to a specific audience (a Medium essay and a conference talk drawn from the same exploration need different depth, jargon, and framing), and everything in it has to trace back to what was actually established during exploration — the same "never trust parametric knowledge" discipline that governs the learning modules also governs the final artifact, since it's still teaching someone, just a different audience.
+
+See `BRAINSTORM.md` for the full design rationale, `CONTEXT.md` for the glossary of terms this skill uses, and `docs/adr/` for the specific trade-offs behind how it's built.
 
 ## Install
 
@@ -24,6 +26,10 @@ cd <your-topic-directory>
 ```
 
 Then invoke the skill and say what you want to explore. Everything — mission, modules, the question graph, the wiki, highlights, and produced artifacts — lives in that directory. See `references/WORKSPACE-LAYOUT.md` for the full file tree, and `SKILL.md` for the two-mode loop (Explore / Create).
+
+## Producing an artifact
+
+Create Mode is triggered explicitly — say what you want ("turn this into a blog post", "help me prepare a conference talk") and it kicks in; it never switches on its own. Five output shapes are supported out of the box: short video script, blog post, long video script, essay (Medium-style), and presentation outline (slides + speaker notes) — see `templates/`. Before drafting, the skill asks who the piece is actually for, since that audience's own background — not yours — determines how much foundational context to include, how dense the jargon can be, and what tone fits. See `references/AUDIENCE-CALIBRATION.md` and `references/OUTPUT-TEMPLATES-GUIDE.md`.
 
 ## The wiki layer
 

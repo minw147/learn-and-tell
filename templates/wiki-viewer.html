@@ -10,14 +10,13 @@
   redesigns unless the user explicitly asks for a different one.
 
   UI LANGUAGE: all interface copy in this template (labels, buttons, tooltips, panel text) is
-  written in Chinese because that's the language the workspace this template was built for was
-  authored in. This is not a fixed convention — when instantiating for a new workspace, write the
-  UI copy in whatever language the user has been communicating in during this session (infer it,
-  don't ask unless genuinely ambiguous). Content pages (PAGES bodies) already follow the user's
-  language naturally since you write them during Explore Mode; this note is about the *chrome*
-  (nav labels, "设置"/"Settings", "布局"/"Layout", "全部"/"All", tooltip field order, etc.), which
-  is template boilerplate and easy to leave in the wrong language by accident if you only swap
-  data and not the surrounding UI strings.
+  written in English by default. This is not a fixed convention — when instantiating for a new
+  workspace, write the UI copy in whatever language the user has been communicating in during this
+  session (infer it, don't ask unless genuinely ambiguous). Content pages (PAGES bodies) already
+  follow the user's language naturally since you write them during Explore Mode; this note is about
+  the *chrome* (nav labels, "Settings", "Layout", "All", tooltip field order, etc.), which is
+  template boilerplate and easy to leave in the wrong language by accident if you only swap data
+  and not the surrounding UI strings.
 
   TO INSTANTIATE FOR A WORKSPACE:
   1. Replace <title>, the header .chapter/.title text, and the top-nav links with the workspace's
@@ -29,32 +28,32 @@
      handles ##, **bold**, `code`, lists, and [[wikilinks]]).
   3. Replace the GROUPS array with the current theme grouping from wiki/index.md.
   4. Replace NODES with one entry per page: { id, en, category, desc }. `category` drives the
-     Linear/编年 view's lanes — pick whichever 3-5 categories actually fit this workspace's
+     Linear/Chronological view's lanes — pick whichever 3-5 categories actually fit this workspace's
      entities (the original design used event/empire/place/person/culture; adapt freely, and
      update CATEGORY_ORDER in the script to match). `desc` is a single sentence for the tooltip
-     and side panel — reuse each page's "一句话" line.
+     and side panel — reuse each page's "One line" summary.
   5. Replace EDGES with [fromId, toId, type, weight] tuples derived from actual [[wikilink]]
      mutuality: if two pages link to each other, type='direct' (solid line + arrowhead); if only
      one links to the other, type='thematic' (dashed, no arrowhead). weight 1-3, higher for
      edges you want visually heavier (e.g. edges connecting your highest-degree hub nodes).
   6. Replace MODULE_URLS with the real mapping from each module id to its deployed lesson URL —
-     this is what lets thin wiki pages (a "一句话" + a few bullets, deliberately not a rewrite of
-     the module) still hand the reader a click-through to the full original content instead of
-     dead-ending. Keep it in sync whenever a module's filename or deploy path changes.
+     this is what lets thin wiki pages (a "one line" summary + a few bullets, deliberately not a
+     rewrite of the module) still hand the reader a click-through to the full original content
+     instead of dead-ending. Keep it in sync whenever a module's filename or deploy path changes.
   7. Leave HUB_THRESHOLD, DEGREE_TIERS, LABEL_THRESHOLD, and the render/graph-physics JS untouched
      unless the user has specifically asked to redesign the viewer itself (separate task from a
-     data resync). The label-density toggle (全部 / 3+, behind the ⚙ 设置 panel) is user-facing UI, not
-     something to reconfigure per workspace.
+     data resync). The label-density toggle (All / 3+, behind the ⚙ Settings panel) is user-facing
+     UI, not something to reconfigure per workspace.
   8. If this workspace deploys a static site, this file (or its instantiated copy) belongs at the
      deploy root or a dedicated route, linked from the site nav — not left sitting only in
      outputs/.
 -->
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{TOPIC}} · 知识关系图</title>
+<title>{{TOPIC}} · Knowledge Graph</title>
 <style>
   :root {
     --bg: #f8f4ea; --bg-2: #f1ead9; --panel: #fffdf7;
@@ -107,7 +106,7 @@
   .tab-btn { font-family: var(--serif); font-size:12.5px; padding:5px 13px; border-radius:6px; border:1px solid var(--line); background:var(--bg-2); color:var(--ink-dim); cursor:pointer; }
   .tab-btn.active { background:var(--gold-fill); color:var(--gold-bright); border-color:var(--gold); font-weight:600; }
 
-  /* graph-only controls: gear icon + dropdown panel, hidden entirely in 阅读 view */
+  /* graph-only controls: gear icon + dropdown panel, hidden entirely in reader view */
   #graph-controls { display:flex; align-items:center; gap:16px; }
   .settings-toggle {
     display:flex; align-items:center; gap:6px; border:1px solid var(--line); background:var(--bg-2);
@@ -249,46 +248,46 @@
 <nav class="top-nav">
   <a href="/">🏠</a>
   <span class="sep">/</span>
-  <a href="/lessons/">📚 课程目录</a>
+  <a href="/lessons/">📚 Lessons</a>
 </nav>
 
 <header>
   <div class="title-group">
     <span class="chapter">Chapter</span>
-    <span class="title">知识关系图<span class="title-en"> · The Knowledge Graph</span></span>
+    <span class="title">The Knowledge Graph</span>
   </div>
   <div class="legend">
-    <div class="item"><span class="dot-hub"></span>枢纽 Hub</div>
-    <div class="item"><span class="dot-leaf"></span>分支 Leaf</div>
-    <div class="item"><span class="line-direct"></span>直接关联</div>
-    <div class="item"><span class="line-thematic"></span>主题关联</div>
+    <div class="item"><span class="dot-hub"></span>Hub</div>
+    <div class="item"><span class="dot-leaf"></span>Leaf</div>
+    <div class="item"><span class="line-direct"></span>Direct link</div>
+    <div class="item"><span class="line-thematic"></span>Thematic link</div>
   </div>
 </header>
 
 <div class="tabs-row">
   <div id="graph-controls">
-    <button class="settings-toggle" id="settings-toggle">⚙ 设置</button>
+    <button class="settings-toggle" id="settings-toggle">⚙ Settings</button>
     <div class="tier-chips" id="tier-chips"></div>
   </div>
   <div id="settings-panel">
     <div class="settings-group">
-      <div class="settings-group-label">布局</div>
+      <div class="settings-group-label">Layout</div>
       <div class="mode-btns" id="mode-btns"></div>
     </div>
     <div class="settings-group">
-      <div class="settings-group-label">标签</div>
+      <div class="settings-group-label">Labels</div>
       <div class="mode-btns" id="label-btns"></div>
     </div>
   </div>
   <div class="view-tabs">
-    <button class="tab-btn active" data-view="graph">图谱</button>
-    <button class="tab-btn" data-view="reader">阅读</button>
+    <button class="tab-btn active" data-view="graph">Graph</button>
+    <button class="tab-btn" data-view="reader">Reader</button>
   </div>
 </div>
 
 <div class="layout">
   <div id="reader-tab" class="layout" style="flex:1;">
-    <button class="drawer-toggle" id="drawer-toggle" aria-label="打开目录">☰</button>
+    <button class="drawer-toggle" id="drawer-toggle" aria-label="Open index">☰</button>
     <div class="drawer-backdrop" id="drawer-backdrop"></div>
     <aside id="sidebar"></aside>
     <main id="main"></main>
@@ -300,7 +299,7 @@
       <div id="vignette"></div>
       <div id="grain"></div>
       <div id="graph-tooltip"><div class="tt-title"></div><div class="tt-en"></div><div class="tt-desc"></div></div>
-      <div id="graph-hint">拖拽节点重新排布 · 滚轮缩放 · 点击查看条目</div>
+      <div id="graph-hint">Drag nodes to rearrange · scroll to zoom · click to open an entry</div>
       <div id="side-panel">
         <div class="sp-top">
           <div>
@@ -314,7 +313,7 @@
         <div class="sp-desc" id="sp-desc"></div>
         <div class="meta-row" id="sp-modules"></div>
         <div class="sp-degree" id="sp-degree"></div>
-        <a class="sp-open" id="sp-open">展开条目 Open Chapter →</a>
+        <a class="sp-open" id="sp-open">Open Chapter →</a>
       </div>
     </div>
   </div>
@@ -325,35 +324,35 @@
 const PAGES = {
 "index": {
   title: "Wiki Index", aliases: [], appears_in: [],
-  body: `## 分组
+  body: `## Groups
 
 Fill in from wiki/index.md's grouped listing, e.g.:
 
 **Group name**: [[example-entity-one]] · [[example-entity-two]]`
 },
 "example-entity-one": {
-  title: "示例实体一 Example Entity One", aliases: [], appears_in: ["0001"],
-  body: `**一句话**：replace this whole PAGES object with real entries generated from wiki/*.md.
+  title: "Example Entity One", aliases: [], appears_in: ["0001"],
+  body: `**One line**: replace this whole PAGES object with real entries generated from wiki/*.md.
 
-## 相关
+## Related
 [[example-entity-two]]`
 },
 "example-entity-two": {
-  title: "示例实体二 Example Entity Two", aliases: [], appears_in: ["0001"],
-  body: `**一句话**：placeholder second page so the graph view has an edge to render.
+  title: "Example Entity Two", aliases: [], appears_in: ["0001"],
+  body: `**One line**: placeholder second page so the graph view has an edge to render.
 
-## 相关
+## Related
 [[example-entity-one]]`
 }
 };
 
 const GROUPS = [
-  ["索引", ["index"]],
-  ["示例分组", ["example-entity-one", "example-entity-two"]],
+  ["Index", ["index"]],
+  ["Example group", ["example-entity-one", "example-entity-two"]],
 ];
 
 /* Maps module ids (as used in appears_in) to the actual deployed lesson/module URL, so wiki
-   pages can stay short (a synthesized "一句话" + a few bullets, not a rewrite of the module)
+   pages can stay short (a synthesized "one line" summary + a few bullets, not a rewrite of the module)
    and still link out to the full module for readers who want more depth. Build this from
    modules/*.html's actual filenames/deploy paths — keep it in sync as new modules are added. */
 const MODULE_URLS = {
@@ -365,7 +364,7 @@ const MODULE_URLS = {
    category: pick 3-5 that fit this workspace's entities and update CATEGORY_ORDER below to match
    (original design used event/empire/place/person/culture — adapt freely). */
 const NODES = [
-  { id:'example-entity-one', en:'Example Entity One', category:'event', desc:"One-sentence summary reused from the page's 一句话 line." },
+  { id:'example-entity-one', en:'Example Entity One', category:'event', desc:"One-sentence summary reused from the page's One line summary." },
   { id:'example-entity-two', en:'Example Entity Two', category:'culture', desc:'Second placeholder so the graph has something to render.' }
 ];
 // edge type is derived from real [[wikilink]] mutuality: linked both ways = 'direct', one-way = 'thematic'
@@ -373,10 +372,10 @@ const EDGES = [
   ['example-entity-one','example-entity-two','direct',2]
 ];
 const DEGREE_TIERS = [
-  { max: 1, color: 'oklch(0.88 0.03 230)', label: '1 条关联 · 1 link' },
-  { max: 3, color: 'oklch(0.85 0.06 170)', label: '2–3 条 · 2–3 links' },
-  { max: Infinity, color: 'oklch(0.78 0.10 70)', label: '4+ 条 · 4+ links' },
-  { hub: true, color: 'oklch(0.68 0.15 45)', label: '枢纽 · Hub' }
+  { max: 1, color: 'oklch(0.88 0.03 230)', label: '1 link' },
+  { max: 3, color: 'oklch(0.85 0.06 170)', label: '2–3 links' },
+  { max: Infinity, color: 'oklch(0.78 0.10 70)', label: '4+ links' },
+  { hub: true, color: 'oklch(0.68 0.15 45)', label: 'Hub' }
 ];
 
 /* ===================== MARKDOWN RENDER (reader mode) — leave untouched ===================== */
@@ -402,7 +401,7 @@ function inline(s) {
   s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   s = s.replace(/`(.+?)`/g, '<code>$1</code>');
   s = s.replace(/\[\[([^\|\]]+)\|([^\]]+)\]\]/g, (m, target, label) => `<a class="wikilink" data-page="${target}">${label}</a>`);
-  s = s.replace(/\[\[([^\]]+)\]\]/g, (m, target) => { const label = PAGES[target] ? PAGES[target].title.split(' ')[0] : target; return `<a class="wikilink" data-page="${target}">${label}</a>`; });
+  s = s.replace(/\[\[([^\]]+)\]\]/g, (m, target) => { const label = PAGES[target] ? PAGES[target].title : target; return `<a class="wikilink" data-page="${target}">${label}</a>`; });
   return s;
 }
 
@@ -413,14 +412,14 @@ GROUPS.forEach(([groupName, ids]) => {
   ids.forEach(id => {
     if (!PAGES[id]) return;
     const a = document.createElement('a'); a.className = 'page-link'; a.dataset.page = id;
-    a.textContent = PAGES[id].title.split(' ')[0]; a.onclick = () => openPage(id); sidebar.appendChild(a);
+    a.textContent = PAGES[id].title; a.onclick = () => openPage(id); sidebar.appendChild(a);
   });
 });
 Object.keys(PAGES).forEach(id => {
   const p = PAGES[id]; const el = document.createElement('div'); el.className = 'page'; el.id = 'page-' + id;
   let metaHtml = p.appears_in.length ? '<div class="meta-row">' + p.appears_in.map(m => {
     const url = MODULE_URLS[m];
-    return url ? `<a class="pill appears" href="${url}" target="_blank" rel="noopener" title="打开完整课程 ${m}">${m} ↗</a>` : `<span class="pill appears">${m}</span>`;
+    return url ? `<a class="pill appears" href="${url}" target="_blank" rel="noopener" title="Open full lesson ${m}">${m} ↗</a>` : `<span class="pill appears">${m}</span>`;
   }).join('') + '</div>' : '';
   let aliasHtml = p.aliases.length ? `<div class="aliases">${p.aliases.join(' · ')}</div>` : '';
   el.innerHTML = `${metaHtml}<h1>${p.title}</h1>${aliasHtml}${renderMarkdown(p.body)}`;
@@ -480,7 +479,7 @@ document.addEventListener('click', (e) => {
 
 /* ===================== TOOLBAR: mode buttons + tier chips — leave untouched ===================== */
 const modeBtnsEl = document.getElementById('mode-btns');
-const MODES = [ { key:'force', label:'网络' }, { key:'linear', label:'编年' } ];
+const MODES = [ { key:'force', label:'Network' }, { key:'linear', label:'Chronological' } ];
 let currentMode = 'force';
 function renderModeBtns() {
   modeBtnsEl.innerHTML = '';
@@ -496,7 +495,7 @@ renderModeBtns();
 
 /* label density: 'all' shows every node's name; 'threshold' shows only hubs + nodes above LABEL_THRESHOLD links */
 const labelBtnsEl = document.getElementById('label-btns');
-const LABEL_MODES = [ { key:'all', label:'全部' }, { key:'threshold', label:'3+' } ];
+const LABEL_MODES = [ { key:'all', label:'All' }, { key:'threshold', label:'3+' } ];
 const LABEL_THRESHOLD = 3;
 let labelMode = 'all';
 function renderLabelBtns() {
@@ -679,7 +678,7 @@ wrap.addEventListener('wheel', (e) => {
 }, { passive: false });
 
 function showTooltip(node, sx, sy) {
-  tooltip.querySelector('.tt-title').textContent = PAGES[node.id].title.split(' ')[0];
+  tooltip.querySelector('.tt-title').textContent = PAGES[node.id].title;
   tooltip.querySelector('.tt-en').textContent = node.en;
   tooltip.querySelector('.tt-desc').textContent = node.desc;
   tooltip.style.opacity = '1';
@@ -689,8 +688,8 @@ function hideTooltip() { tooltip.style.opacity = '0'; }
 
 function selectNode(node) {
   selectedId = node.id;
-  document.getElementById('sp-hub').textContent = node.isHub ? '枢纽节点 · Hub' : '分支节点 · Leaf';
-  document.getElementById('sp-label').textContent = PAGES[node.id].title.split(' ')[0];
+  document.getElementById('sp-hub').textContent = node.isHub ? 'Hub' : 'Leaf';
+  document.getElementById('sp-label').textContent = PAGES[node.id].title;
   document.getElementById('sp-en').textContent = node.en;
   document.getElementById('sp-desc').textContent = node.desc;
   const appearsIn = (PAGES[node.id] && PAGES[node.id].appears_in) || [];
@@ -698,7 +697,7 @@ function selectNode(node) {
     const url = MODULE_URLS[m];
     return url ? `<a class="pill appears" href="${url}" target="_blank" rel="noopener">${m} ↗</a>` : `<span class="pill appears">${m}</span>`;
   }).join('');
-  document.getElementById('sp-degree').textContent = node.degree + ' 条关联 · ' + node.degree + ' connections';
+  document.getElementById('sp-degree').textContent = node.degree + ' connections';
   document.getElementById('sp-open').onclick = () => showReaderWithPage(node.id);
   sidePanel.classList.add('open');
 }
@@ -792,7 +791,7 @@ function draw() {
     if (!showLabel) { ctx.globalAlpha = 1; return; }
     const fontSize = (n.isHub ? 14 : 12) / transform.scale;
     ctx.font = `${n.isHub ? '700' : '400'} ${fontSize}px Georgia, 'Palatino Linotype', serif`;
-    const label = PAGES[n.id].title.split(' ')[0];
+    const label = PAGES[n.id].title;
     const tw = ctx.measureText(label).width;
     const lx = n.x, ly = n.y + r + fontSize + 4 / transform.scale;
     const rect = { x: lx - tw/2 - 4, y: ly - fontSize, w: tw + 8, h: fontSize + 6 };

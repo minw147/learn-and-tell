@@ -10,7 +10,7 @@ Why not a fixed instrument: VARK-style "teach to the learner's stated style" is 
 - **Cognitive style**: field-independent (analytical, hypothesis-driven, detail-oriented, works well independently) vs field-dependent (needs context/social framing, more global grasp) — Witkin's field dependence-independence model, one of the few learning-style constructs with actual predictive validity.
 - **Exploration breadth**: divergent (jumps across branches, generates many directions — score qualitatively on Torrance's fluency/flexibility/originality/elaboration) vs convergent (goes deep on one line before branching).
 - **Output-format preference**: gravitates toward visual/illustrated framing vs prefers dense text — this is purely a *production* preference (which template/illustration density to lean into later), never a claim that presenting material visually teaches this user better.
-- **Question density and type**: frequent short questions vs infrequent but deep ones; factual-clarifying vs connective/meta ("为什么叫X？", "这两个概念有联系吗？" — these are high-value signals, see `/teach`'s "Meta-Question Signals").
+- **Question density and type**: frequent short questions vs infrequent but deep ones; factual-clarifying vs connective/meta ("why is it called X?", "is there a connection between these two concepts?" — these are high-value signals, see `/teach`'s "Meta-Question Signals").
 - **Feedback response mode**: responds well to being asked to confirm/elaborate vs prefers the AI just state a conclusion and move on.
 
 ## Format

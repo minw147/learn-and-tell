@@ -35,8 +35,12 @@ _Avoid_: Learning style quiz, personality profile, user segment.
 The default mode. The user has a topic they're curious about but no fixed output target yet. The AI follows their curiosity, generates modules, and runs problem-posing after each one.
 
 **Create Mode**:
-Entered when the user explicitly signals they want to turn part of their exploration into a publishable artifact (e.g. "帮我把这个写成视频稿"). The AI's role shifts to filling knowledge gaps and structuring the confirmed highlights into an output template.
+Entered when the user explicitly signals they want to turn part of their exploration into a publishable artifact (e.g. "help me turn this into a video script"). The AI's role shifts to filling knowledge gaps and structuring the confirmed highlights into an output template.
 _Avoid_: Production mode, export mode.
+
+**Audience calibration**:
+The Create Mode step that establishes who a specific artifact is for — what they already know, what they're there for, what tone/formality fits — before drafting. Scoped **per artifact, not per workspace**: the same exploration can produce a general-audience essay and a domain-peer presentation, each needing different calibration. Not the same thing as ZPD calibration in Explore Mode, which is about the explorer's own understanding — this is about the *reader's* or *listener's* understanding.
+_Avoid_: Target audience, persona, reader profile.
 
 **Problem-posing**:
 The core interaction after each module: the user poses a question or scenario, rather than the AI quizzing the user. The question itself is the signal of understanding, not something to be scored.

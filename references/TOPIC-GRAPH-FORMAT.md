@@ -21,7 +21,7 @@
       "from": "0004",
       "to": "0004b-europe-track",
       "type": "question-spawned",
-      "question": "欧洲内部怎么回事？各国怎么形成的？",
+      "question": "What was going on inside Europe itself? How did the individual countries form?",
       "user_note": "wants to understand intra-European formation before continuing main track",
       "timestamp": "2026-07-17T11:30:00Z"
     }
@@ -56,7 +56,7 @@ Regenerate as a simple readable outline after every JSON update, e.g.:
 
 - 0001 Timeline Skeleton ✅
   - 0002 Rome & Christianity ✅ (prerequisite)
-    - 0004b Europe Track ✅ (question-spawned — "欧洲内部怎么回事？")
+    - 0004b Europe Track ✅ (question-spawned — "what was going on inside Europe itself?")
   - 0003 Islamic Rise ✅ (prerequisite)
 - 0004 Collision Era (planned)
 ```

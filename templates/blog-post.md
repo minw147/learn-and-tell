@@ -9,7 +9,7 @@ For a connected arc across several highlights — see `references/OUTPUT-TEMPLAT
 
 ## Opening
 {Start from the question that drove the exploration, not a topic
-definition. "我以为X，直到我发现Y" style openings work well when the
+definition. "I assumed X, until I discovered Y" style openings work well when the
 user's own problem-posing produced a real reversal.}
 
 ## {Section per highlight or branch}
